@@ -1,0 +1,169 @@
+1. npm init - package.json file created, has the information about the project
+2. npm install -s express - installing the express framework for node.js - is a framework for web/mobile apps
+3. touch server.js - creating the server file and editing with "code ." in visual studio code
+4. adding an instance of express with code in server.js: 
+------------------------------------------------------------------------
+var express = require(‘express’);
+
+var app = express();
+------------------------------------------------------------------------
+5. adding listening to port code in server.js:
+------------------------------------------------------------------------
+var server = app.listen(3000, () => {
+ console.log(‘server is running on port’, server.address().port);
+});
+------------------------------------------------------------------------
+6. touch index.html - creating html file for the user interface 
+7. filling index.html with premade code for bootstrap and JQuery cdn:
+------------------------------------------------------------------------
+//index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+ <! — include bootstap and jquery cdn →
+</head>
+<body>
+<div class=”container”>
+ <br>
+ <div class=”jumbotron”>
+ <h1 class=”display-4">Send Message</h1>
+ <br>
+ <input id = “name” class=”form-control” placeholder=”Name”>
+ <br>
+ <textarea id = “message” class=”form-control” placeholder=”Your Message Here”>
+</textarea>
+ <br>
+ <button id=”send” class=”btn btn-success”>Send</button>
+ </div>
+ <div id=”messages”>
+ 
+</div>
+</div>
+<script>
+
+</script>
+</body>
+</html>
+------------------------------------------------------------------------
+8. static file to comunicate with express - NEW LINE in server.js:
+------------------------------------------------------------------------
+app.use(express.static(__dirname));
+------------------------------------------------------------------------
+9. run server using command:  [test if server is working, start index.html and see, can write something, STRG-C to close down the server]
+------------------------------------------------------------------------
+node ./server.js
+------------------------------------------------------------------------
+10. npm install -g nodemon   -  installing nodemon to detect changes automatically [-g - global, so that it is accessible in all projects]
+11. run server again, but now using nodemon:   [check out frontend again]
+------------------------------------------------------------------------
+nodemon ./server.js
+------------------------------------------------------------------------
+12. need to create database:
+	- will be No-SQL database
+	- will use MongoDB
+	- will be in mlab.com
+	- will have single collection called messages with fields name + message that stores all the information entered
+	- needs package Mongoose to get have a connection between database and app
+13. npm install -s mongoose - installing the object modeling tool for MondoDB		
+14. mongoose entered into server.js:
+------------------------------------------------------------------------
+var mongoose = require(‘mongoose’);
+------------------------------------------------------------------------
+15. register to mlab.com with 500mb free space - picked AWS Cloud Provider in Frakfurt (eu-central-1) for my cluster [no backup for free users]
+16. mlab.com - user vilian - cluster edit - then download software and get dbUrl [ mongo "mongodb+srv://cluster0.o3lsa.mongodb.net/<dbname>" --username vilian ]
+17. adding the dbUrl in server.js - [ mongo "mongodb+srv://cluster0.o3lsa.mongodb.net/<dbname>" --username vilian ]
+18. npm install -s body-parser  - installing body parser, it extracts the entire body portion of an incoming request stream and exposes it on req.body
+19. code in server.js about body parser is needed:
+------------------------------------------------------------------------
+var bodyParser = require(‘body-parser’)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}))
+------------------------------------------------------------------------
+20. need to create two routes to the messages for the chat to work - adding code in server.js: [this will get all the messages from the database]
+------------------------------------------------------------------------
+app.get('/messages', (req, res) => {
+  Message.find({},(err, messages)=> {
+    res.send(messages);
+  })
+})
+------------------------------------------------------------------------
+21. naturally need post code too - in server.js:
+------------------------------------------------------------------------
+app.post('/messages', (req, res) => {
+  var message = new Message(req.body);
+  message.save((err) =>{
+    if(err)
+      sendStatus(500);
+    res.sendStatus(200);
+  })
+})
+------------------------------------------------------------------------
+22. need to connect the two routes to the frontend now - code in index.html in <script> here </script>:
+------------------------------------------------------------------------
+$(() => {
+    $("#send").click(()=>{
+       sendMessage({
+          name: $("#name").val(), 
+          message:$("#message").val()});
+        })
+      getMessages()
+    })
+    
+function addMessages(message){
+   $(“#messages”).append(`
+      <h4> ${message.name} </h4>
+      <p>  ${message.message} </p>`)
+   }
+   
+function getMessages(){
+  $.get(‘http://localhost:3000/messages', (data) => {
+   data.forEach(addMessages);
+   })
+ }
+ 
+function sendMessage(message){
+   $.post(‘http://localhost:3000/messages', message)
+ }
+------------------------------------------------------------------------
+
+HELPFUL INFORMATION ABOUT THIS: 
+Here the sendMessage is used to invoke the post route of the messages, and save a message sent by the user. The message is created when a user clicks the send button.
+
+Similarly the getMessage is used to invoke the get route of messages. This will get all the messages saved in the database and will be appended to the messages div.
+
+23. problem is found - need to update page to see new message
+    solution is to use socket.io to inform server of changes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

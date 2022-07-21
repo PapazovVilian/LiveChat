@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>LIVE CHAT WITH PEOPLE</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <!-- Login-Seite -->
+  <div class="login page">
+    <h3 class="title">Dein Username:</h3>
+    <input class="usernameInput" type="text" maxlength="14" />
+  </div>
+
+  <!-- Put-In-Text-Seite (initial ausgeblendet) -->
+  <div class="putintext page">
+    <h3 class="title">Deine Nachricht:</h3>
+    <input class="inputMessage" placeholder="Type here..." />
+
+  </div>
+
+
+  <!-- Chat-Seite (initial ausgeblendet) -->
+  <div class="chat page">
+    <ul class="messages"></ul>
+  </div>
+
+  <!-- code auf der client-seite -->
+  <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/main.js"></script>
+</body>
+
+</html>

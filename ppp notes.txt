@@ -1,0 +1,35 @@
+
+
+   Node.js ist ein Framework, der es uns erlaubt, ein webserver 
+   zu erstellen und front-/back-end zu bearbeiten. Dabei wird 
+   normalerweise JavaSkript benutzt.
+   
+   NPM ist ein Paketmanager für die JavaScript-Laufzeitumgebung Node.js.
+
+   EJS entschlüsselt JavaSkript Funktionalität durch templates 
+   z.B. <% if (user) { %>
+
+   Express ist ein Node.js-Framework von Webanwendungen, das uns viele zusätzliche 
+   Features und Funktionen für Anwendungen bereitstellt. So wie eine Ebene mit 
+   grundlegenden Funktionen.z.B. kümmert sich um Get-Anforderungen
+
+   Nodemon hilft bei der Development von Node.js-Anwendungen. Neustart der 
+   Anwendung, wenn es Änderungen den Dateien gibt.
+
+   Body-Parser hilft uns weniger selber proggrammieren zu müssen, indem BP
+   mit Express.js als ein middleware gilt. Kümmert sich um POST-Anforderungen.
+
+   Socket.io - Das besondere an Live Chat ist, dass sich Client und Server in 
+   beide Richtungen unterhalten können müssen. In HTTP fragt der Browser(Front-end) 
+   den Server(Back-end) um Dateien (HTML, CSS, JavaScript). Der Server schickt den 
+   Inhalt der Dateien an den Browser. Der Server kann aber normalerweise nicht von 
+   sich aus dem Browser eine Nachricht schicken. Genau das brauchen wir aber. 
+   Schließlich muss der Server alle Browser informieren, wenn ein Benutzer eine 
+   Nachricht eingegeben hat.
+
+	node ./server.js
+	http://localhost:3000
+
+   
+
+   

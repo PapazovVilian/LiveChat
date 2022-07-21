@@ -1,0 +1,51 @@
+h3{
+    color: rgb(37, 27, 32)
+  }
+
+ul{
+    list-style: none;
+    padding: 0;
+}
+li{
+    word-wrap: break-word;
+}
+
+/* Globale Schriftart setzen (weniger "schnörkelig") */
+body {
+    font-family: sans-serif;
+    background-color: rgb(51, 133, 153);
+    }
+ 
+ /* Login-Seite initial ausblenden */
+ .login.page {
+    text-align: center;
+    border-style: double;
+    padding: 30px;
+    background-color: lightblue;
+    display: block;
+    }
+
+  /* Put-In-Text-Seite initial ausblenden */
+  .putintext.page {
+    display: none;
+    text-align: center;
+    border-style: double;
+    padding: 30px;
+    background-color: lightblue;
+    
+  }
+  /* Chat-Seite initial ausblenden */
+  .chat.page {
+    text-align: center;
+    border-style: double;
+    padding: 30px;
+    background-color: lightblue;
+    display: block;
+  }
+      
+  /* Format für Benutzernamen bei der Ausgabe einer Chat-Nachricht */
+  .username {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+
